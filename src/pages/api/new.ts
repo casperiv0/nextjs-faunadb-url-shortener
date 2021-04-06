@@ -1,7 +1,7 @@
 import { Collection, Create } from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Url } from "../../interfaces/Url";
-import { client } from "../../lib/faunadb";
+import { Url } from "types/Url";
+import { client } from "@lib/faunadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;

@@ -52,6 +52,7 @@ export default function Home() {
               <p>{error}</p>
             </div>
           ) : null}
+
           <div className="flex flex-col mb-3">
             <label className="mb-3" htmlFor="url">
               Enter URL
@@ -81,7 +82,12 @@ export default function Home() {
           </div>
 
           <div className="flex justify-between">
-            <div>Shortened URL: {result}</div>
+            <div>
+              Shortened URL:{" "}
+              <a target="_blank" rel="noopener noreferrer" href={result}>
+                {result}
+              </a>
+            </div>
 
             <div>
               <button className="p-2 px-4 text-white rounded-md bg-gray-600 self-end transition-all">
