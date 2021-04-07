@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const data: Url = {
           url,
           slug,
+          clicks: 0,
         };
 
         const doc = await client.query<{ data: Url }>(

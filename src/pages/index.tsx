@@ -84,7 +84,7 @@ export default function Home() {
           <div className="flex justify-between">
             <div>
               Shortened URL:{" "}
-              <a target="_blank" rel="noopener noreferrer" href={result}>
+              <a className="hover:underline" target="_blank" rel="noopener noreferrer" href={result}>
                 {result}
               </a>
             </div>
