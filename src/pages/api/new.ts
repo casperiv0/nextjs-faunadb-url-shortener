@@ -28,14 +28,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           status: "success",
         });
       } catch (e) {
-        console.log(e);
-
         if (e?.description) {
           return res.status(400).json({
             error: e.description,
             status: "error",
           });
         } else {
+          console.log(e);
           return res.json({
             error: "An unexpected error occurred",
             status: "error",

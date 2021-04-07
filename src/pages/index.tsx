@@ -38,7 +38,7 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-gray-50 h-screen flex items-center">
+    <div className="bg-gray-50 h-screen flex items-center justify-center w-screen">
       <Head>
         <title>FaunaDB URL shortener</title>
 
@@ -63,15 +63,17 @@ export default function Home() {
         <meta property="og:url" content="https://ctgs.ga" />
       </Head>
 
-      <div className="w-3/5 md:mx-auto">
+      <div className="w-screen px-10 md:w-9/12 xl:w-3/6 xl:px-0">
         <h1 className="text-2xl mb-5">Create a shortened URL!</h1>
 
         <form onSubmit={handleSubmit}>
-          {error ? (
-            <div className="bg-red-500 p-3 rounded-md text-white mb-3 transition-all">
-              <p>{error}</p>
-            </div>
-          ) : null}
+          <div
+            className={`bg-red-500 p-3 rounded-md text-white mb-3 transition-all ${
+              error ? "opacity-1" : "opacity-0"
+            }`}
+          >
+            <p>{error}</p>
+          </div>
 
           <div className="flex flex-col mb-3">
             <label className="mb-3" htmlFor="url">
