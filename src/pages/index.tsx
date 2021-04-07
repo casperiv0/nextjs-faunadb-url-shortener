@@ -41,6 +41,26 @@ export default function Home() {
     <div className="bg-gray-50 h-screen flex items-center">
       <Head>
         <title>FaunaDB URL shortener</title>
+
+        <meta name="twitter:title" content="FaunaDB URL shortener" />
+        <meta property="og:site_name" content="FaunaDB URL shortener" />
+        <meta property="og:title" content="FaunaDB URL shortener" />
+
+        <meta
+          name="description"
+          content="A simple FaunaDB, tailwindcss and next.js URL shortener"
+        />
+        <meta
+          property="og:description"
+          content="A simple FaunaDB, tailwindcss and next.js URL shortener"
+        />
+        <meta
+          name="twitter:description"
+          content="A simple FaunaDB, tailwindcss and next.js URL shortener"
+        />
+
+        <link rel="canonical" href="https://ctgs.ga" />
+        <meta property="og:url" content="https://ctgs.ga" />
       </Head>
 
       <div className="w-3/5 md:mx-auto">
@@ -84,7 +104,12 @@ export default function Home() {
           <div className="flex justify-between">
             <div>
               Shortened URL:{" "}
-              <a className="hover:underline" target="_blank" rel="noopener noreferrer" href={result}>
+              <a
+                className="hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={result}
+              >
                 {result}
               </a>
             </div>
