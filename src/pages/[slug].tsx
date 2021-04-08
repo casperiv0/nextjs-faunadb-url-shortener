@@ -12,6 +12,7 @@ const Slug = ({ data }: Props) => {
     <div className="bg-gray-50 h-screen flex flex-col justify-center items-center">
       <Head>
         <title>404 - Not found</title>
+        <meta name="description" content="Whoops! The item was not found" />
       </Head>
 
       <p className="text-4xl">{data}</p>
@@ -23,9 +24,7 @@ const Slug = ({ data }: Props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_PROD_URL}/api/${ctx.query.slug}`).then((r) =>
-    r.json()
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_PROD_URL}/api/${ctx.query.slug}`).then((r) => r.json());
 
   // url was found
   if (res.status === "success") {
