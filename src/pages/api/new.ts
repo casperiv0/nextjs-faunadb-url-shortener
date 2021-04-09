@@ -1,5 +1,6 @@
 import { Collection, Create } from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
+import isUrl from "is-absolute-url";
 import { Url } from "../../interfaces/Url";
 import { client } from "../../lib/faunadb";
 
@@ -10,6 +11,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case "POST": {
       try {
         const { slug, url } = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+
+        if (!isUrl(url)) {
+          return res.status(400).json({
+            error: "URL must be a valid (absolute) URL",
+            status: "error",
+          });
+        }
 
         const data: Url = {
           url,
