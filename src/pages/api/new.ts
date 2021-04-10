@@ -20,6 +20,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
 
+        if (url.includes(process.env.NEXT_PUBLIC_PROD_URL)) {
+          return res.status(400).json({
+            error: "Cannot use this URL!",
+            status: "error",
+          });
+        }
+
         const slugified = slugify(slug, {
           replacement: "-",
           lower: true,
