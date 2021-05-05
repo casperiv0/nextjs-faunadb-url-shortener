@@ -2,8 +2,14 @@ import { Collection, Create } from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
 import isUrl from "is-absolute-url";
 import slugify from "slugify";
-import { Url } from "../../interfaces/Url";
-import { client } from "../../lib/faunadb";
+import * as yup from "yup";
+import { Url } from "types/Url";
+import { client } from "@lib/faunadb";
+
+const schema = yup.object().shape({
+  slug: yup.string().trim().required().lowercase(),
+  url: yup.string().trim().required().url(),
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
@@ -12,6 +18,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case "POST": {
       try {
         const { slug, url } = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+
+        const isValid = await schema.isValid({
+          slug,
+          url,
+        });
+
+        if (!isValid) {
+          const error = await schema.validate({ slug, url }).catch((e) => e);
+
+          return res.status(400).json({
+            error: error.errors[0],
+            status: "error",
+          });
+        }
 
         if (!isUrl(url)) {
           return res.status(400).json({

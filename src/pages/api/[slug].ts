@@ -1,7 +1,7 @@
 import { Get, Index, Match, Ref, Update } from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Url } from "../../interfaces/Url";
-import { client } from "../../lib/faunadb";
+import { Url } from "types/Url";
+import { client } from "@lib/faunadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
@@ -10,9 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case "GET": {
       try {
         const slug = query.slug;
-        const doc = await client.query<{ ref: typeof Ref; data: Url }>(
-          Get(Match(Index("urls_by_slug"), slug))
-        );
+        const doc = await client.query<{ ref: typeof Ref; data: Url }>(Get(Match(Index("urls_by_slug"), slug)));
 
         const updated = await client.query<{ data: Url }>(
           Update(doc.ref, {

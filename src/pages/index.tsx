@@ -5,12 +5,12 @@ export default function Home() {
   const [url, setUrl] = React.useState("");
   const [slug, setSlug] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
-  const [result, setResult] = React.useState(null);
+  const [result, setResult] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState(false);
   const ref = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    ref.current.focus();
+    ref.current?.focus();
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -116,9 +116,11 @@ export default function Home() {
           <div className="flex justify-between">
             <div>
               Shortened URL:{" "}
-              <a className="hover:underline" target="_blank" rel="noopener noreferrer" href={result}>
-                {result}
-              </a>
+              {result ? (
+                <a className="hover:underline" target="_blank" rel="noopener noreferrer" href={result}>
+                  {result}
+                </a>
+              ) : null}
             </div>
 
             <div>
