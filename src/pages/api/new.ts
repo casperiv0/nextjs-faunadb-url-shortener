@@ -55,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const data: Url = {
           url,
-          slug: slugified,
+          slug: encodeURIComponent(slugified),
           clicks: 0,
         };
 
