@@ -7,8 +7,8 @@ import { Url } from "types/Url";
 import { client } from "@lib/faunadb";
 
 const schema = yup.object().shape({
-  slug: yup.string().trim().required().lowercase(),
-  url: yup.string().trim().required().url(),
+  slug: yup.string().trim().required().lowercase().max(255),
+  url: yup.string().trim().required().url().max(2500),
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
