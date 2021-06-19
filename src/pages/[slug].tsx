@@ -24,9 +24,10 @@ const Slug = ({ data }: Props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_PROD_URL}/api/${encodeURIComponent(ctx.query.slug as string)}`
-  ).then((r) => r.json());
+  const slug = encodeURIComponent(ctx.query.slug as string);
+  const url = `${process.env.NEXT_PUBLIC_PROD_URL}/api/${slug}`;
+
+  const res = await fetch(url).then((r) => r.json());
 
   // url was found
   if (res.status === "success") {

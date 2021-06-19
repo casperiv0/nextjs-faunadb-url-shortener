@@ -3,8 +3,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import isUrl from "is-absolute-url";
 import slugify from "slugify";
 import * as yup from "yup";
+
 import { Url } from "types/Url";
 import { client } from "@lib/faunadb";
+import { Query } from "types/Query";
 
 const schema = yup.object().shape({
   slug: yup.string().trim().required().lowercase().max(255),
@@ -59,10 +61,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           clicks: 0,
         };
 
-        const doc = await client.query<{ data: Url }>(
+        const doc = await client.query<Query<Url>>(
           Create(Collection("urls"), {
             data,
-          })
+          }),
         );
 
         return res.json({

@@ -1,6 +1,6 @@
 {
   "name": "nextjs-faunadb-url-shortener",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,11 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "@types/react": "^17.0.6",
-    "@types/react-dom": "^17.0.5",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "faunadb": "^4.3.0",
     "is-absolute-url": "^3.0.3",
-    "next": "10.2.2",
+    "next": "11.0.0",
     "preact": "^10.5.13",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -20,9 +20,9 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.3.0",
-    "tailwindcss": "^2.1.2",
-    "typescript": "^4.2.4"
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.2",
+    "typescript": "^4.3.4"
   }
 }
