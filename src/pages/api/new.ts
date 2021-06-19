@@ -1,17 +1,18 @@
-import { Collection, Create } from "faunadb";
+import * as yup from "yup";
+import * as f from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
 import isUrl from "is-absolute-url";
 import slugify from "slugify";
-import * as yup from "yup";
+import { validateSchema } from "@casper124578/utils";
 
 import { Url } from "types/Url";
 import { client } from "@lib/faunadb";
 import { Query } from "types/Query";
 
-const schema = yup.object().shape({
+const createSlugObj = {
   slug: yup.string().trim().required().lowercase().max(255),
   url: yup.string().trim().required().url().max(2500),
-});
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
@@ -21,14 +22,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         const { slug, url } = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
 
-        const isValid = await schema.isValid({
-          slug,
-          url,
-        });
+        const [error] = await validateSchema(createSlugObj, { slug, url });
 
-        if (!isValid) {
-          const error = await schema.validate({ slug, url }).catch((e) => e);
-
+        if (error) {
           return res.status(400).json({
             error: error.errors[0],
             status: "error",
@@ -62,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         };
 
         const doc = await client.query<Query<Url>>(
-          Create(Collection("urls"), {
+          f.Create(f.Collection("urls"), {
             data,
           }),
         );

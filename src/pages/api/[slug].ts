@@ -1,4 +1,4 @@
-import { Get, Index, Match, Update } from "faunadb";
+import * as f from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Url } from "types/Url";
 import { client } from "@lib/faunadb";
@@ -11,10 +11,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case "GET": {
       try {
         const slug = query.slug;
-        const doc = await client.query<Query<Url>>(Get(Match(Index("urls_by_slug"), slug)));
+        const doc = await client.query<Query<Url>>(f.Get(f.Match(f.Index("urls_by_slug"), slug)));
 
         const updated = await client.query<Query<Url>>(
-          Update(doc.ref, {
+          f.Update(doc.ref, {
             data: {
               url: doc.data.url,
               slug: doc.data.slug,
