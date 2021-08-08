@@ -47,7 +47,7 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-gray-50 h-screen flex items-center justify-center w-screen">
+    <div className="bg-gray-50 dark:bg-gray-800 text-black dark:text-gray-300 h-screen flex items-center justify-center w-screen">
       <Head>
         <title>FaunaDB URL shortener</title>
 
@@ -68,7 +68,7 @@ export default function Home() {
           rel="noopener noreferrer"
           target="_blank"
           href="https://github.com/Dev-CasperTheGhost/nextjs-faunadb-url-shortener"
-          className="py-2 px-3 bg-gray-600 text-white rounded-md"
+          className="py-2 px-3 bg-gray-600 dark:bg-gray-700 text-white rounded-md"
         >
           Source code
         </a>
@@ -92,7 +92,7 @@ export default function Home() {
               ref={ref}
               type="url"
               id="url"
-              className="p-2 px-3 rounded-md ring-2 ring-gray-200 outline-none focus:ring-2 focus:ring-gray-600 transition-all"
+              className="p-2 px-3 bg-white dark:bg-gray-700 rounded-md ring-2 ring-gray-200 dark:ring-gray-600 outline-none focus:ring-2 focus:ring-gray-600 focus:dark:ring-gray-500 transition-all"
               placeholder="URL"
               value={url}
               onChange={(e) => setUrl(e.currentTarget.value)}
@@ -106,7 +106,7 @@ export default function Home() {
             <input
               type="text"
               id="slug"
-              className="p-2 px-3 rounded-md ring-2 ring-gray-200 outline-none focus:ring-2 focus:ring-gray-600 transition-all"
+              className="p-2 px-3 bg-white dark:bg-gray-700 rounded-md ring-2 ring-gray-200 dark:ring-gray-600 outline-none focus:ring-2 focus:ring-gray-600 focus:dark:ring-gray-500 transition-all"
               placeholder="Slug"
               value={slug}
               onChange={(e) => setSlug(e.currentTarget.value)}
@@ -126,7 +126,7 @@ export default function Home() {
             <div>
               <button
                 disabled={loading}
-                className={`p-2 px-4 text-white rounded-md bg-gray-600 self-end transition-all ${
+                className={`p-2 px-4 text-white rounded-md bg-gray-600 dark:bg-gray-700 self-end transition-all ${
                   loading ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
               >
