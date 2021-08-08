@@ -9,7 +9,7 @@ interface Props {
 
 const Slug = ({ data }: Props) => {
   return (
-    <div className="bg-gray-50 h-screen flex flex-col justify-center items-center">
+    <div className="bg-gray-50 dark:bg-gray-800 dark:text-gray-300 h-screen flex flex-col justify-center items-center">
       <Head>
         <title>404 - Not found</title>
         <meta name="description" content="Whoops! The item was not found" />
