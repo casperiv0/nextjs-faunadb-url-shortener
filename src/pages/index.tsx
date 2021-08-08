@@ -117,9 +117,26 @@ export default function Home() {
             <div>
               Shortened URL:{" "}
               {result ? (
+                <>
                 <a className="hover:underline" target="_blank" rel="noopener noreferrer" href={result}>
                   {result}
                 </a>
+                <span
+                  className="text-sm ml-2 text-white dark:text-gray-300 bg-gray-600 dark:bg-gray-700 p-0.5 px-1 rounded cursor-pointer"
+                  onClick={(e) => {
+                    const element = e.currentTarget;
+
+                    navigator.clipboard.writeText(result);
+                    element.innerText = "Copied!";
+
+                    setTimeout(() => {
+                      element.innerText = "Copy";
+                    }, 600);
+                  }}
+                >
+                  Copy
+                </span>
+                </>
               ) : null}
             </div>
 
