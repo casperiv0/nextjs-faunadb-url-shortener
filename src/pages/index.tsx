@@ -1,5 +1,8 @@
 import Head from "next/head";
 import * as React from "react";
+import { getThemeFromLocal, Theme, updateBodyClass, updateLocalTheme } from "lib/theme";
+import { MoonIcon } from "icons/MoonIcon";
+import { SunIcon } from "icons/Sun";
 
 export default function Home() {
   const [url, setUrl] = React.useState("");
@@ -7,11 +10,27 @@ export default function Home() {
   const [error, setError] = React.useState<string | null>(null);
   const [result, setResult] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState(false);
+
+  const [theme, setTheme] = React.useState<Theme>("dark");
+
   const ref = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     ref.current?.focus();
   }, []);
+
+  React.useEffect(() => {
+    const t = getThemeFromLocal();
+
+    setTheme(t);
+    updateBodyClass(t);
+  }, []);
+
+  function handleThemeChange() {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    updateLocalTheme(newTheme);
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -55,9 +74,18 @@ export default function Home() {
         <meta property="og:site_name" content="FaunaDB URL shortener" />
         <meta property="og:title" content="FaunaDB URL shortener" />
 
-        <meta name="description" content="A simple FaunaDB, tailwindcss and next.js URL shortener" />
-        <meta property="og:description" content="A simple FaunaDB, tailwindcss and next.js URL shortener" />
-        <meta name="twitter:description" content="A simple FaunaDB, tailwindcss and next.js URL shortener" />
+        <meta
+          name="description"
+          content="A simple FaunaDB, tailwindcss and next.js URL shortener"
+        />
+        <meta
+          property="og:description"
+          content="A simple FaunaDB, tailwindcss and next.js URL shortener"
+        />
+        <meta
+          name="twitter:description"
+          content="A simple FaunaDB, tailwindcss and next.js URL shortener"
+        />
 
         <link rel="canonical" href="https://ctgs.ga" />
         <meta property="og:url" content="https://ctgs.ga" />
@@ -74,12 +102,24 @@ export default function Home() {
         </a>
       </div>
 
+      <div className="absolute top-5 right-5">
+        <button onClick={handleThemeChange} className="p-2">
+          {theme === "dark" ? (
+            <MoonIcon className="fill-current text-white" width="20px" height="20px" />
+          ) : (
+            <SunIcon className="fill-current text-gray-700" width="20px" height="20px" />
+          )}
+        </button>
+      </div>
+
       <div className="w-screen px-10 md:w-9/12 xl:w-3/6 xl:px-0">
         <h1 className="text-2xl mb-5">Create a shortened URL!</h1>
 
         <form onSubmit={handleSubmit}>
           <div
-            className={`bg-red-500 p-3 rounded-md text-white mb-3 transition-all ${error ? "opacity-1" : "opacity-0"}`}
+            className={`bg-red-500 p-3 rounded-md text-white mb-3 transition-all ${
+              error ? "opacity-1" : "opacity-0"
+            }`}
           >
             <p>{error}</p>
           </div>
@@ -118,24 +158,29 @@ export default function Home() {
               Shortened URL:{" "}
               {result ? (
                 <>
-                <a className="hover:underline" target="_blank" rel="noopener noreferrer" href={result}>
-                  {result}
-                </a>
-                <span
-                  className="text-sm ml-2 text-white dark:text-gray-300 bg-gray-600 dark:bg-gray-700 p-0.5 px-1 rounded cursor-pointer"
-                  onClick={(e) => {
-                    const element = e.currentTarget;
+                  <a
+                    className="hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={result}
+                  >
+                    {result}
+                  </a>
+                  <span
+                    className="text-sm ml-2 text-white dark:text-gray-300 bg-gray-600 dark:bg-gray-700 p-0.5 px-1 rounded cursor-pointer"
+                    onClick={(e) => {
+                      const element = e.currentTarget;
 
-                    navigator.clipboard.writeText(result);
-                    element.innerText = "Copied!";
+                      navigator.clipboard.writeText(result);
+                      element.innerText = "Copied!";
 
-                    setTimeout(() => {
-                      element.innerText = "Copy";
-                    }, 600);
-                  }}
-                >
-                  Copy
-                </span>
+                      setTimeout(() => {
+                        element.innerText = "Copy";
+                      }, 600);
+                    }}
+                  >
+                    Copy
+                  </span>
                 </>
               ) : null}
             </div>

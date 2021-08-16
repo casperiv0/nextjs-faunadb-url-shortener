@@ -3,10 +3,11 @@ import * as f from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
 import isUrl from "is-absolute-url";
 import slugify from "slugify";
+// @ts-expect-error ignore
 import { validateSchema } from "@casper124578/utils";
 
 import { Url } from "types/Url";
-import { client } from "@lib/faunadb";
+import { client } from "lib/faunadb";
 import { Query } from "types/Query";
 
 const createSlugObj = {
@@ -73,13 +74,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             error: e.description,
             status: "error",
           });
-        } else {
-          console.log(e);
-          return res.json({
-            error: "An unexpected error occurred",
-            status: "error",
-          });
         }
+
+        console.log(e);
+        return res.json({
+          error: "An unexpected error occurred",
+          status: "error",
+        });
       }
     }
     default: {
