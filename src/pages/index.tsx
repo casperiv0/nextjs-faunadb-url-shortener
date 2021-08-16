@@ -132,7 +132,7 @@ export default function Home() {
               ref={ref}
               type="url"
               id="url"
-              className="p-2 px-3 bg-white dark:bg-gray-700 rounded-md ring-2 ring-gray-200 dark:ring-gray-600 outline-none focus:ring-2 focus:ring-gray-600 focus:dark:ring-gray-500 transition-all"
+              className="p-2 px-3 bg-white dark:bg-gray-700 rounded-md ring-2 ring-gray-200 dark:ring-gray-600 outline-none focus:ring-2 focus:ring-gray-600 dark:focus:ring-white transition-all"
               placeholder="URL"
               value={url}
               onChange={(e) => setUrl(e.currentTarget.value)}
@@ -146,7 +146,7 @@ export default function Home() {
             <input
               type="text"
               id="slug"
-              className="p-2 px-3 bg-white dark:bg-gray-700 rounded-md ring-2 ring-gray-200 dark:ring-gray-600 outline-none focus:ring-2 focus:ring-gray-600 focus:dark:ring-gray-500 transition-all"
+              className="p-2 px-3 bg-white dark:bg-gray-700 rounded-md ring-2 ring-gray-200 dark:ring-gray-600 outline-none focus:ring-2 focus:ring-gray-600 dark:focus:ring-white transition-all"
               placeholder="Slug"
               value={slug}
               onChange={(e) => setSlug(e.currentTarget.value)}
