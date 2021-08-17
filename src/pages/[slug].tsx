@@ -2,22 +2,29 @@ import { GetServerSideProps } from "next";
 import * as React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { getThemeFromLocal, updateBodyClass } from "lib/theme";
 
 interface Props {
   data: string;
 }
 
 const Slug = ({ data }: Props) => {
+  React.useEffect(() => {
+    updateBodyClass(getThemeFromLocal());
+  }, []);
+
   return (
     <div className="bg-gray-50 dark:bg-gray-800 dark:text-gray-300 h-screen flex flex-col justify-center items-center">
       <Head>
         <title>404 - Not found</title>
-        <meta name="description" content="Whoops! The item was not found" />
+        <meta name="description" content="Whoops! The slug was not found" />
       </Head>
 
       <p className="text-4xl">{data}</p>
       <Link href="/">
-        <a className="mt-8 p-2 px-4 bg-gray-600 text-white rounded-md">Return to home</a>
+        <a className="mt-8 p-2 px-4 bg-gray-600 text-white rounded-md dark:hover:ring-2 dark:hover:ring-white transition-all">
+          Return to home
+        </a>
       </Link>
     </div>
   );

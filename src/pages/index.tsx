@@ -188,7 +188,7 @@ export default function Home() {
             <div>
               <button
                 disabled={loading}
-                className={`p-2 px-4 text-white rounded-md bg-gray-600 dark:bg-gray-700 self-end transition-all ${
+                className={`p-2 px-4 text-white rounded-md bg-gray-600 dark:bg-gray-700 dark:focus:ring-2 dark:focus:ring-white self-end transition-all ${
                   loading ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
               >
