@@ -3,7 +3,6 @@ import * as f from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
 import isUrl from "is-absolute-url";
 import slugify from "slugify";
-// @ts-expect-error ignore
 import { validateSchema } from "@casper124578/utils";
 
 import { Url } from "types/Url";
