@@ -103,11 +103,15 @@ export default function Home() {
       </div>
 
       <div className="absolute top-5 right-5">
-        <button onClick={handleThemeChange} className="p-2">
-          {theme === "dark" ? (
-            <MoonIcon className="fill-current text-white" width="20px" height="20px" />
+        <button
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+          onClick={handleThemeChange}
+          className="p-2"
+        >
+          {theme === "light" ? (
+            <MoonIcon className="fill-current text-gray-700 " width="20px" height="20px" />
           ) : (
-            <SunIcon className="fill-current text-gray-700" width="20px" height="20px" />
+            <SunIcon className="fill-current text-white" width="20px" height="20px" />
           )}
         </button>
       </div>
