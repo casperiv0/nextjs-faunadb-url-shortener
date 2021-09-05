@@ -193,7 +193,7 @@ export default function Home() {
               <button
                 disabled={loading}
                 className={`p-2 px-4 text-white rounded-md bg-gray-600 dark:bg-gray-700 dark:focus:ring-2 dark:focus:ring-white self-end transition-all ${
-                  loading ? "cursor-not-allowed" : "cursor-pointer"
+                  loading ? "cursor-not-allowed opacity-70" : "cursor-pointer"
                 }`}
               >
                 {loading ? "loading..." : "Create!"}
