@@ -3,6 +3,7 @@ import * as React from "react";
 import { getThemeFromLocal, Theme, updateBodyClass, updateLocalTheme } from "lib/theme";
 import { MoonIcon } from "icons/MoonIcon";
 import { SunIcon } from "icons/Sun";
+import { GetStaticProps } from "next";
 
 export default function Home() {
   const [url, setUrl] = React.useState("");
@@ -205,3 +206,12 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    redirect: {
+      permanent: true,
+      destination: "https://ctgs.xyz?fromGa=true",
+    },
+  };
+};
